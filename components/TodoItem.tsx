@@ -1,7 +1,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/assets/hooks/redux"
 import { getTodos } from "@/assets/store/reducers/actionCreators"
-import { IITodoStatee, deleteTodo } from "@/assets/store/reducers/todoSlice"
+import { ITodoState, deleteTodo } from "@/assets/store/reducers/todoSlice"
 import { useEffect, useState } from 'react'
 
 
@@ -11,7 +11,7 @@ const TodoItem = () => {
         dispatch(getTodos())
     }, [])
 
-    const [randomTodo, setRandomTodo] = useState<null | IITodoStatee>(null)
+    const [randomTodo, setRandomTodo] = useState<null | ITodoState>(null)
     const todoList = useAppSelector(state => state.todoReducer)
     const dispatch = useAppDispatch()
  
