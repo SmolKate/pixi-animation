@@ -1,25 +1,29 @@
 
 import { useAppDispatch, useAppSelector } from "@/assets/hooks/redux"
-import { getTodos } from "@/assets/store/reducers/actionCreators"
+import { getTodos } from "@/assets/store/reducers/todoActionCreators"
 import { ITodoState, deleteTodo } from "@/assets/store/reducers/todoSlice"
 import { useEffect, useState } from 'react'
 
 
 const TodoItem = () => {
-
-    useEffect(() => {
-        dispatch(getTodos())
-    }, [])
-
-    const [randomTodo, setRandomTodo] = useState<null | ITodoState>(null)
     const todoList = useAppSelector(state => state.todoReducer)
     const dispatch = useAppDispatch()
- 
+    const [randomTodo, setRandomTodo] = useState<null | ITodoState>(null)
+    const [isTodoList, setIsTodoList] = useState<boolean>(false)
+
+    useEffect(() => {
+         dispatch(getTodos())
+    }, [dispatch])
+
     const getRandomInt = (min: number, max: number) => {
         const result = Math.floor(Math.random() * (max - min + 1))
-        console.log(result)
         return result
     }
+
+    if (todoList.length != 0 && !isTodoList) {
+        setIsTodoList(true)
+    } 
+    
     const randomHandler = () => {
         const randomIndex = getRandomInt(0, todoList.length-1)
         const randomTodo = todoList[randomIndex]
@@ -27,6 +31,10 @@ const TodoItem = () => {
         dispatch(deleteTodo(randomIndex))
     }
     
+    useEffect(() => {
+        randomHandler()
+    }, [isTodoList])
+
     return (
         <>
         <div> 
