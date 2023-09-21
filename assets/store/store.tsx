@@ -1,8 +1,10 @@
 import todoReducer from '@/assets/store/reducers/todoSlice'
+import authReducer from '@/assets/store/reducers/authSlice'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 const rootReducer = combineReducers({
-    todoReducer
+    todoReducer,
+    authReducer
 })
 export const store = configureStore({
   reducer: rootReducer,

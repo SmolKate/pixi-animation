@@ -1,15 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { authAPI } from "@/assets/api/authApi";
+import { useAppDispatch } from "@/assets/hooks/redux";
+import { getAuthUser } from "@/assets/store/reducers/authSlice";
 
 interface IAuthFields {
     username: string
     password: string
-}
-
-interface IProps {
-    loginHandler: (username: string, password: string) => void
 }
 
 const schema = yup.object({
@@ -17,12 +14,14 @@ const schema = yup.object({
     password: yup.string().min(6, 'Пароль слишком короткий.').max(20, 'Пароль слишком длинный').required(),
   }).required();
 
-const AuthForm = ({loginHandler}: IProps) => {
+const AuthForm = () => {
+    const dispatch = useAppDispatch()
+
     const { register, handleSubmit, formState:{ errors }, reset } = useForm<IAuthFields>({
         resolver: yupResolver(schema)
       });
     const onSubmit: SubmitHandler<IAuthFields> = async (data) => {
-        loginHandler(data.username, data.password)
+        dispatch(getAuthUser(data))
         reset()
     }
     return (
