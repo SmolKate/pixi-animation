@@ -2,6 +2,7 @@ import TodoItem from "@/components/TodoItem"
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { NextPage } from "next"
+import Picture from "@/components/Picture"
 
 const Todo: NextPage = () => {
 

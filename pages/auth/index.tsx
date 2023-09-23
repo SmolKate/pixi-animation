@@ -10,6 +10,7 @@ import { redirect } from 'next/navigation'
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/assets/hooks/useAuth'
+import FetchError from '@/components/FetchError'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,6 +31,9 @@ const inter = Inter({ subsets: ['latin'] })
 const Auth: NextPage = () => {
 
   const isAuth = useAppSelector(state => state.authReducer.isAuth)
+  const authError = useAppSelector(state => state.authReducer.error)
+  const authStatus = useAppSelector(state => state.authReducer.status)
+
   const canActivate = useAuth()
 
   const router = useRouter()
@@ -51,6 +55,7 @@ const Auth: NextPage = () => {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <AuthForm />
+        <FetchError error={authError} status={authStatus}/>
         <Link href='/todo'>Login</Link>
       </main>
     </>

@@ -23,7 +23,7 @@ export const getAuthUser = createAsyncThunk(
       // return response
     } catch (err: unknown | AxiosError) {
       if(axios.isAxiosError(err)) {
-          return rejectWithValue(err.message + ', ' + err.response?.data.message)
+          return rejectWithValue(err.message + ': ' + err.response?.data.message)
       }
     }  
 });

@@ -1,7 +1,4 @@
 import { useEffect, ReactNode, useState } from 'react'
-
-import { useRouter } from 'next/router'
-import { useAuth } from '@/assets/hooks/useAuth'
 import { useAppSelector } from '@/assets/hooks/redux'
 
 const LoadingWrapper = ({ children }: { children: ReactNode }) => {
