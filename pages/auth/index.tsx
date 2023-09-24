@@ -1,41 +1,18 @@
-
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Auth.module.css'
 import AuthForm from '@/components/AuthForm'
 import { NextPage } from 'next'
 import { useAppSelector } from '@/assets/hooks/redux'
-import router, { useRouter } from 'next/router'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Link from 'next/link'
 import { useAuth } from '@/assets/hooks/useAuth'
 import FetchError from '@/components/FetchError'
 
-const inter = Inter({ subsets: ['latin'] })
-
-// export const getStaticProps = async () => {
-//   const todoList = await todoAPI.getTodoList()
-
-//   return {
-//       props: {
-//         todoList
-//       }
-//   }
-// }
-
-// type PropsType = {
-//   todoList: ITodoState[]
-// }
-
 const Auth: NextPage = () => {
-
-  const isAuth = useAppSelector(state => state.authReducer.isAuth)
   const authError = useAppSelector(state => state.authReducer.error)
   const authStatus = useAppSelector(state => state.authReducer.status)
-
   const canActivate = useAuth()
-
   const router = useRouter()
 
   useEffect(() => {
@@ -43,7 +20,6 @@ const Auth: NextPage = () => {
       router.push('/todo')
     }
   }, [router, canActivate])
-
 
   return (
     <>
@@ -53,10 +29,11 @@ const Auth: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={styles.main}>
         <AuthForm />
-        <FetchError error={authError} status={authStatus}/>
-        <Link href='/todo'>Login</Link>
+        <div className={styles.fetchError}>
+          <FetchError error={authError} status={authStatus} />
+        </div>
       </main>
     </>
   )

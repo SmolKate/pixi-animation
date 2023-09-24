@@ -7,10 +7,9 @@ const nextConfig = {
         source: '/',
         destination: '/auth',
         permanent: true,
-      }
-
+      },
     ]
-  }
+  },
 }
 
 module.exports = nextConfig

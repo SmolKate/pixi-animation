@@ -1,23 +1,20 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 interface IProps {
-    error: string | null
-    status: string | null
+  error: string | null
+  status: string | null
 }
 
-const FetchError = ({error, status}: IProps) => {
+const FetchError = ({ error, status }: IProps) => {
+  const [isError, setIsError] = useState(false)
 
-    const [isError, setIsError] = useState(false)
+  useEffect(() => {
+    if (status == 'rejected') {
+      setIsError(true)
+    }
+  }, [status])
 
-    useEffect(() => {
-        if(status == 'rejected') {
-            setIsError(true)
-        }
-    }, [status])
-
-    return (
-        <div>{error}</div>
-    )
+  return <>{isError && <div>{error}</div>}</>
 }
 
 export default FetchError

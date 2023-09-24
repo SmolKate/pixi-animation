@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 import LoadingWrapper from '@/assets/hoc/LoadingWrapper'
 
 export default function App({ Component, pageProps }: AppProps) {
-
   return (
-  <Provider store={store}>
-    <LoadingWrapper>
-    <Component {...pageProps} />
-    </LoadingWrapper>
-  </Provider>
-)}
+    <Provider store={store}>
+      <LoadingWrapper>
+        <Component {...pageProps} />
+      </LoadingWrapper>
+    </Provider>
+  )
+}
