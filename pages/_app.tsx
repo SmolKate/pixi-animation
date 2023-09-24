@@ -1,8 +1,8 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { store } from '../assets/store/store'
+import { store } from '../shared/store/store'
 import { Provider } from 'react-redux'
-import LoadingWrapper from '@/assets/hoc/LoadingWrapper'
+import LoadingWrapper from '@/shared/hoc/Loading/LoadingWrapper'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

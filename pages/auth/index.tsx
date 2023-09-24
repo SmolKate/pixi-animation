@@ -1,13 +1,17 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Auth.module.css'
-import AuthForm from '@/components/AuthForm'
+import styles from '@/modules/auth/style/Auth.module.css'
+import AuthForm from '@/modules/auth/components/AuthForm'
 import { NextPage } from 'next'
-import { useAppSelector } from '@/assets/hooks/redux'
+import { useAppSelector } from '@/shared/hooks/reduxHooks'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useAuth } from '@/assets/hooks/useAuth'
-import FetchError from '@/components/FetchError'
+import { useAuth } from '@/shared/hooks/useAuth'
+import FetchError from '@/shared/components/FetchError'
+
+/*
+  Страница авторизации пользователя
+*/
 
 const Auth: NextPage = () => {
   const authError = useAppSelector(state => state.authReducer.error)

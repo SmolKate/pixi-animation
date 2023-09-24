@@ -1,7 +1,12 @@
-import TodoItem from '@/components/TodoItem'
+import TodoItem from '@/modules/todo/components/TodoItem'
 import Head from 'next/head'
-import styles from '@/styles/Todo.module.css'
+import styles from '@/modules/todo/style/Todo.module.css'
 import { NextPage } from 'next'
+
+/*
+  Страница отображения рандомного задания, 
+  которое меняется при клике на мячике
+*/
 
 const Todo: NextPage = () => {
   return (
