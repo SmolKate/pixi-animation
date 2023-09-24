@@ -43,7 +43,7 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
 
     // create a container
     const container = new PIXI.Container()
-    app.stage.addChild(container)
+    app.stage.addChild(container as PIXI.DisplayObject)
 
     async function init() {
       const pictureLoader = {
@@ -77,20 +77,20 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
       field.anchor.set(0.5)
       field.width = 500
       field.height = 80
-      container.addChild(field)
+      container.addChild(field as PIXI.DisplayObject)
 
       const shadow = new PIXI.Graphics()
       shadow.beginFill('rgba(41, 49, 51, 0.5)')
       shadow.drawEllipse(0, 0, 40, 10)
       shadow.y = -10
-      container.addChild(shadow)
+      container.addChild(shadow as PIXI.DisplayObject)
 
       const ball = new PIXI.Sprite(loadFieldAssets.ball)
       ball.anchor.set(0.5, 1)
       ball.width = 100
       ball.height = 100
       ball.y = -10
-      container.addChild(ball)
+      container.addChild(ball as PIXI.DisplayObject)
 
       ball.eventMode = 'static'
       ball.cursor = 'pointer'
