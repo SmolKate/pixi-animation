@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 
+// Хук для определения, прошел ли пользователь авторизацию
 export const useAuth = () => {
   const getItem = (key: string) => {
     if (typeof window !== 'undefined') {

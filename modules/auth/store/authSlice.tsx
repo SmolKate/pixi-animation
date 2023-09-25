@@ -31,6 +31,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    // удаление сообщения об ошибке
     deleteError: state => {
       state.error = null
     },

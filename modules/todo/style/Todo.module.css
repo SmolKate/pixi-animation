@@ -22,12 +22,14 @@
   background-color: #1a5e0941;
 }
 
+/* Стили для отображения изображения с анимацией*/
 .picture canvas {
   max-width: 400px;
   min-width: 200px;
   width: 100%;
 }
 
+/* Стили для отображения todo задания */
 .todo {
   width: 100%;
   max-width: 400px;
@@ -41,6 +43,7 @@
   text-align: center;
 }
 
+/* Стили для отображения ошибки при запросе данных с сервера*/
 .fetchError {
   color: red;
   text-align: center;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+// Компонента для отображения сообщения об ошибке, полученного при отправке запроса на сервер
 interface IProps {
   error: string | null
   status: string | null

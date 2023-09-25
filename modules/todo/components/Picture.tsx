@@ -7,44 +7,44 @@ import { useAppDispatch } from '@/shared/hooks/reduxHooks'
 import { deleteIsLoading, setIsLoading } from '@/modules/todo/store/todoSlice'
 
 interface IPicture {
-  clickHandler: () => void
+  clickHandler: () => void   // обработчик, выполняемый при клике на мяч
 }
 const Picture: FC<IPicture> = ({ clickHandler } ) => {
 
   const ref = useRef<HTMLDivElement>(null)
   const dispatch = useAppDispatch()
 
+  // Обработчик для отображения процесса загрузки изображений
   const loadingHandler = (index: number) => {
     if(index == 1) {
-      dispatch(deleteIsLoading())
+      dispatch(deleteIsLoading()) // окончание процесса загрузки
     }
   }
 
+  // Начало процесса загрузки
   useEffect(() => {
     dispatch(setIsLoading())
   }, [])
 
+  // Создание сцены с платформой и прыгающим по клику мячом
   useEffect(() => {
     
-    // On first render create our application
     const app = new PIXI.Application<HTMLCanvasElement>({
       width: 500,
       height: 250,
       backgroundAlpha: 0,
     })
 
-    // globalThis.__PIXI_APP__ = app;
+    // globalThis.__PIXI_APP__ = app;   // для тестирования в браузере 
 
-    // Add app to DOM
     ref.current?.appendChild(app.view)
-
-    // Start the PixiJS app
     app.start()
 
-    // create a container
+    // Создание контейнера и добавление на сцену
     const container = new PIXI.Container()
     app.stage.addChild(container as PIXI.DisplayObject)
 
+    // Инициализация загрузки изображений, добавление объектов в контейнер и наложение анимации
     async function init() {
       const pictureLoader = {
         bundles: [
@@ -70,21 +70,25 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
       makeLoadScreen()
     }
 
+    // Добавление объектов в контейнер
     async function makeLoadScreen() {
       const loadFieldAssets = await PIXI.Assets.loadBundle('load-screen', loadingHandler)
 
+      // Добавление поля
       const field = new PIXI.Sprite(loadFieldAssets.field)
       field.anchor.set(0.5)
       field.width = 500
       field.height = 80
       container.addChild(field as PIXI.DisplayObject)
 
+      // Добавление тени
       const shadow = new PIXI.Graphics()
       shadow.beginFill('rgba(41, 49, 51, 0.5)')
       shadow.drawEllipse(0, 0, 40, 10)
       shadow.y = -10
       container.addChild(shadow as PIXI.DisplayObject)
 
+      // Добавление мяча
       const ball = new PIXI.Sprite(loadFieldAssets.ball)
       ball.anchor.set(0.5, 1)
       ball.width = 100
@@ -96,14 +100,15 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
       ball.cursor = 'pointer'
       ball.on('click', gsapFn)
 
-      // Animating using GSAP
-
+      // Добавление анимации с помощью GSAP
       function gsapFn() {
-        ball.eventMode = 'none'
+
+        ball.eventMode = 'none'      // мяч недоступен для каких-либо событий
 
         let tlBall = gsap.timeline()
         let tlShadow = gsap.timeline()
 
+        // движение мяча
         tlBall
           .to(ball, {
             keyframes: {
@@ -119,9 +124,10 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
           .play()
           .then(() => {
             clickHandler()
-            ball.eventMode = 'static'
+            ball.eventMode = 'static'  // мяч доступен для событий
           })
 
+        // движение тени
         tlShadow
           .to(shadow, {
             keyframes: {
@@ -144,7 +150,7 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
     container.y = app.screen.height - 40
 
     return () => {
-      // On unload completely destroy the application and all of it's children
+      // При выгрузке компоненты приложение pixi и все объекты удаляются
       app.destroy(true, true)
     }
   }, [])

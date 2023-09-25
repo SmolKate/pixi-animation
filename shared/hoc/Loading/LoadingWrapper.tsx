@@ -2,6 +2,8 @@ import { useEffect, ReactNode, useState } from 'react'
 import { useAppSelector } from '@/shared/hooks/reduxHooks'
 import styles from '@/shared/hoc/Loading/Loading.module.css'
 
+// HOC для отображения процесса загрузки
+
 const LoadingWrapper = ({ children }: { children: ReactNode }) => {
   const todoLoading = useAppSelector(state => state.todoReducer.status)
   const authLoading = useAppSelector(state => state.authReducer.status)

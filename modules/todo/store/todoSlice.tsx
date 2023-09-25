@@ -19,6 +19,7 @@ const initialState: ITodoState = {
   isAssetsLoading: false
 }
 
+// Запрос списка todo заданий с сервера и сохранение их в state
 export const getTodos = createAsyncThunk('todo/getTodos', async function (_, { rejectWithValue }) {
   try {
     const response = await todoAPI.getTodoList()
@@ -34,15 +35,18 @@ export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
+    // сохранение рандомного задания
     setRandomTodo: (state, action: PayloadAction<number>) => {
       if (state.todos.length != 0) {
         state.randomTodo = state.todos[action.payload]
         state.todos.splice(action.payload, 1)
       }
     },
+    // начало загрузки изображений в pixi приложении
     setIsLoading: (state) => {
       state.isAssetsLoading = true
     },
+    // прекращение загрузки изображений в pixi приложении
     deleteIsLoading: (state) => {
       state.isAssetsLoading = false
     },
