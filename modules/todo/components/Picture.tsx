@@ -98,7 +98,7 @@ const Picture: FC<IPicture> = ({ clickHandler } ) => {
 
       ball.eventMode = 'static'
       ball.cursor = 'pointer'
-      ball.on('click', gsapFn)
+      ball.on('pointertap', gsapFn)
 
       // Добавление анимации с помощью GSAP
       function gsapFn() {
